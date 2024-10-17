@@ -1,13 +1,9 @@
-import React from "react";
-import Dashboard from "../components/Dashboard";
-
-function Home() {
+const Home = () => {
   return (
     <div>
-      <h2>Home</h2>
-      <Dashboard />
+      <h2>Welcome to the Seizure Detection App</h2>
     </div>
   );
-}
+};
 
 export default Home;

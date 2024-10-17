@@ -1,21 +1,18 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
-function Profile() {
-  const { user } = useContext(AuthContext);
+const Profile = () => {
+  const { user } = useAuth();
 
   return (
     <div>
-      <h2>Profile</h2>
-      {user ? (
+      <h2>User Profile</h2>
+      {user && (
         <div>
           <p>Email: {user.email}</p>
         </div>
-      ) : (
-        <p>No user logged in</p>
       )}
     </div>
   );
-}
+};
 
 export default Profile;

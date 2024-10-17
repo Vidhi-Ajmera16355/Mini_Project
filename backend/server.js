@@ -14,9 +14,17 @@ const server = http.createServer(app);
 // Connect to MongoDB
 connectDB();
 
-// Middleware
-app.use(cors());
-app.use(express.json()); // Parse JSON request bodies
+// CORS configuration
+const corsOptions = {
+  origin: "http://localhost:3000", // Your React frontend
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, // Allow sending cookies
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+app.use(cors(corsOptions));
+
+// Middleware to parse JSON bodies
+app.use(express.json());
 
 // API Routes
 app.use("/api/auth", authRoutes);
@@ -25,6 +33,12 @@ app.use("/api/users", userRoutes);
 
 // Initialize Socket.io
 const io = initSocket(server);
+
+// Global Error Handling (Optional)
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: "Internal Server Error" });
+});
 
 // Server listening on port
 const PORT = process.env.PORT || 5000;

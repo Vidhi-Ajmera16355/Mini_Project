@@ -1,46 +1,39 @@
-import React, { useEffect, useState } from "react";
-import { Line } from "react-chartjs-2";
-import { socket } from "../sockets/socket";
+import { useEffect, useState } from "react";
+import api from "../services/api";
+import Alert from "../components/Alert";
+import { useAuth } from "../context/AuthContext";
 
-function Dashboard() {
-  const [eegData, setEegData] = useState([]);
-  const [alert, setAlert] = useState(null);
+const Dashboard = () => {
+  const { user } = useAuth();
+  const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    socket.on("eeg_data", (data) => {
-      setEegData((prevData) => [...prevData.slice(-49), data]);
-    });
-
-    socket.on("seizure_alert", (message) => {
-      setAlert(message);
-    });
-
-    return () => {
-      socket.off("eeg_data");
-      socket.off("seizure_alert");
+    const fetchSeizureEvents = async () => {
+      const response = await api.get(`/seizures/${user.id}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
+      setEvents(response.data);
     };
-  }, []);
 
-  const chartData = {
-    labels: Array.from({ length: eegData.length }, (_, i) => i),
-    datasets: [
-      {
-        label: "EEG Data",
-        data: eegData,
-        borderColor: "rgba(75, 192, 192, 1)",
-        borderWidth: 2,
-        fill: false,
-      },
-    ],
-  };
+    if (user) {
+      fetchSeizureEvents();
+    }
+  }, [user]);
 
   return (
     <div>
-      <h3>Real-Time EEG Monitoring</h3>
-      <Line data={chartData} />
-      {alert && <div style={{ color: "red" }}>{alert}</div>}
+      <h2>Seizure Alerts</h2>
+      <Alert />
+      <h2>Seizure Event History</h2>
+      <ul>
+        {events.map((event) => (
+          <li key={event._id}>
+            {event.description} - {new Date(event.timestamp).toLocaleString()}
+          </li>
+        ))}
+      </ul>
     </div>
   );
-}
+};
 
 export default Dashboard;
