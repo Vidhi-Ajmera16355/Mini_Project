@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./css/Login.css"; // New CSS file for login-specific styles
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -16,51 +17,48 @@ function Login() {
         "http://localhost:5000/api/auth/login",
         { email, password }
       );
-      localStorage.setItem("token", response.data.token); // Store JWT token in localStorage
-      navigate("/dashboard"); // Redirect to dashboard after successful login
+      localStorage.setItem("token", response.data.token);
+      navigate("/dashboard");
     } catch (error) {
-      setError(error.response.data.message); // Set error message
+      setError(error.response.data.message);
       console.error("Login error:", error.response.data.message);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm">
-        <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
-        {error && <p className="text-red-500 mb-4">{error}</p>}
+    <div className="login-page">
+      <div className="login-container">
+        <h2 className="login-title">Welcome Back</h2>
+        {error && <p className="login-error">{error}</p>}
         <form onSubmit={handleLogin}>
-          <div className="mb-4">
-            <label className="block text-gray-700">Email</label>
+          <div className="form-group">
+            <label>Email</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none"
+              className="login-input"
               placeholder="Enter your email"
               required
             />
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700">Password</label>
+          <div className="form-group">
+            <label>Password</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none"
+              className="login-input"
               placeholder="Enter your password"
               required
             />
           </div>
-          <button
-            type="submit"
-            className="w-full bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition duration-300"
-          >
+          <button type="submit" className="login-button">
             Login
           </button>
         </form>
-        <div className="mt-4 text-center">
-          <a href="#" className="text-blue-500 hover:underline">
+        <div className="forgot-password">
+          <a href="#" className="forgot-link">
             Forgot Password?
           </a>
         </div>

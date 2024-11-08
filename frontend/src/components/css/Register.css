@@ -1,0 +1,153 @@
+/* Global Page Styling */
+.register-page {
+    background: url('https://png.pngtree.com/background/20230524/original/pngtree-an-image-of-a-human-brain-with-an-outline-of-different-picture-image_2711425.jpg') no-repeat center center/cover;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Overlay to make content stand out */
+  .register-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Dark overlay */
+    z-index: -1;
+  }
+  
+  .register-container {
+    background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    padding: 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    animation: fadeIn 1.5s ease-in-out; /* Fade-in animation */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  
+  /* Scale and shadow animation when hovering over the form */
+  .register-container:hover {
+    transform: scale(1.05); /* Slight scaling on hover */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4); /* Stronger shadow on hover */
+  }
+  
+  .register-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #000000; /* White text to contrast with background */
+    opacity: 0; /* Start with opacity 0 */
+    animation: fadeInText 2s forwards 1s; /* Delayed text fade-in */
+  }
+  
+  .form-group {
+    margin-bottom: 1.25rem;
+    animation: slideIn 1s ease-in-out forwards;
+  }
+  
+  .register-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Lighter border */
+    background: rgba(255, 255, 255, 0.1); /* Slight transparency */
+    color: #fff; /* White text for inputs */
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+  }
+  
+  /* Focus effect with stronger transparency and border */
+  .register-input:focus {
+    border-color: #28a745;
+    background-color: rgba(255, 255, 255, 0.3);
+    outline: none;
+  }
+  
+  .register-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  /* Button hover effect */
+  .register-button:hover {
+    background-color: #218838;
+    transform: translateY(-5px); /* Lift the button on hover */
+  }
+  
+  .login-link {
+    margin-top: 1.5rem;
+  }
+  
+  .login-link-text {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .login-link-text:hover {
+    color: #0056b3;
+  }
+  
+  /* Error Styling */
+  .register-error {
+    color: #e3342f;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    background-color: #f8d7da;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  /* Animations */
+  
+  /* Fade-in for the form container */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px); /* Move upwards during fade */
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Fade-in text with delay */
+  @keyframes fadeInText {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Sliding animation for form inputs */
+  @keyframes slideIn {
+    from {
+      transform: translateX(-20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
