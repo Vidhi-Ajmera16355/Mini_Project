@@ -134,6 +134,45 @@
   }
 }
 
+.logout-btn {
+  background-color: red;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background-color: darkred;
+}
+
+/* Popup Message Styling */
+.logout-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #4caf50;
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 1.1em;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+}
+
+/* Fade out the message */
+.logout-message p {
+  margin: 0;
+}
+
+/* Add animation to hide the message after 3 seconds */
+.logout-message {
+  animation: fadeOut 3s forwards;
+}
+
 /* Mobile Menu Functionality */
 .menu-icon {
   cursor: pointer;
@@ -141,4 +180,16 @@
 
 .menu-icon.active + .nav-links {
   height: auto;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }

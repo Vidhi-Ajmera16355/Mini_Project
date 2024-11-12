@@ -1,13 +1,24 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./css/Navbar.css"; // Import the CSS file
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showLogoutMessage, setShowLogoutMessage] = useState(false);
+  const navigate = useNavigate();
+
+  // Check if user is logged in by checking for token in localStorage
+  const isLoggedIn = !!localStorage.getItem("token");
 
   const handleLogout = () => {
     localStorage.removeItem("token"); // Clear token on logout
-    window.location.href = "/"; // Redirect to login
+    setShowLogoutMessage(true); // Show logout message
+
+    // Navigate to the login page after a short delay
+    setTimeout(() => {
+      setShowLogoutMessage(false); // Hide logout message after 3 seconds
+      navigate("/"); // Redirect to login page
+    }, 3000);
   };
 
   return (
@@ -15,7 +26,7 @@ function Navbar() {
       <div className="container">
         {/* Navbar Brand */}
         <div className="brand">
-          <Link to="/" className="brand-title">
+          <Link to={isLoggedIn ? "/home" : "/"} className="brand-title">
             Seizure Detection App
           </Link>
         </div>
@@ -45,17 +56,34 @@ function Navbar() {
 
         {/* Navbar Links */}
         <div className={`nav-links ${isMenuOpen ? "active" : ""}`}>
-          <Link to="/" className="nav-item">
-            Login
-          </Link>
-          <Link to="/register" className="nav-item">
-            Register
-          </Link>
-          <button onClick={handleLogout} className="nav-item logout-btn">
-            Logout
-          </button>
+          {isLoggedIn ? (
+            <>
+              <Link to="/screening" className="nav-item">
+                Input
+              </Link>
+              <button onClick={handleLogout} className="nav-item logout-btn">
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/" className="nav-item">
+                Login
+              </Link>
+              <Link to="/register" className="nav-item">
+                Register
+              </Link>
+            </>
+          )}
         </div>
       </div>
+
+      {/* Logout Confirmation Message */}
+      {showLogoutMessage && (
+        <div className="logout-message">
+          <p>Successfully logged out!</p>
+        </div>
+      )}
     </nav>
   );
 }

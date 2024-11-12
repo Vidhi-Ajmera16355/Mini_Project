@@ -1,0 +1,23 @@
+/* Home.css */
+
+.home-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  background-color: #f3f4f6;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 2.5em;
+  color: #333;
+}
+
+p {
+  font-size: 1.2em;
+  color: #555;
+  line-height: 1.5;
+  margin-top: 15px;
+}
