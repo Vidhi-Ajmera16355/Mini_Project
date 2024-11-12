@@ -21,7 +21,10 @@ function Navbar() {
         </div>
 
         {/* Hamburger Menu Icon for Mobile */}
-        <div className="menu-icon" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+        <div
+          className={`menu-icon ${isMenuOpen ? "active" : ""}`}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
           <svg
             className="menu-icon-svg"
             xmlns="http://www.w3.org/2000/svg"

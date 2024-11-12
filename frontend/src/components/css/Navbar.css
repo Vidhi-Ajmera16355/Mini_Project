@@ -3,9 +3,14 @@
   position: sticky;
   top: 0;
   width: 100%;
-  background-color: rgba(0, 0, 0); /* Fully transparent background */
+  background: linear-gradient(
+    45deg,
+    #0056b3,
+    #ff9800
+  ); /* Gradient background */
   z-index: 1000;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease;
 }
 
 .container {
@@ -22,12 +27,13 @@
 .brand-title {
   font-size: 1.8rem;
   font-weight: bold;
-  color: #fff;
+  color: #ffffff;
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 .brand-title:hover {
-  color: #ff9800;
+  color: #ffeb3b;
 }
 
 /* Navbar Links (Desktop View) */
@@ -48,7 +54,7 @@
 
 .nav-item:hover {
   background-color: rgba(255, 255, 255, 0.2);
-  color: #ff9800;
+  color: #ffeb3b;
 }
 
 /* Logout Button */
@@ -58,16 +64,18 @@
   cursor: pointer;
   font-size: 1.1rem;
   color: white;
+  transition: color 0.3s ease;
 }
 
 .logout-btn:hover {
-  color: #ff9800;
+  color: #ffeb3b;
 }
 
 /* Mobile Menu Icon */
 .menu-icon {
   display: none;
   cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 .menu-icon-svg {
@@ -75,6 +83,11 @@
   height: 30px;
   fill: white;
   stroke: white;
+  transition: transform 0.3s ease;
+}
+
+.menu-icon.active .menu-icon-svg {
+  transform: rotate(90deg); /* Rotate on active */
 }
 
 /* Media Query for Mobile */
@@ -88,7 +101,7 @@
     top: 60px;
     right: 0;
     width: 100%;
-    background-color: rgba(122, 100, 100,0.8);
+    background-color: rgba(0, 0, 0, 0.9);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -99,8 +112,8 @@
   }
 
   .nav-links.active {
-    height: auto; /* Adjust height automatically */
-    padding: 10px 0; /* Add padding for better appearance */
+    height: auto;
+    padding: 10px 0;
   }
 
   .nav-item {
@@ -108,7 +121,7 @@
     padding: 15px;
     width: 100%;
     text-align: center;
-    border-bottom: 1px solid rgba(255, 244, 244, 0.1); /* Adds a separator */
+    border-bottom: 1px solid rgba(255, 244, 244, 0.1);
     transition: background-color 0.2s ease, color 0.2s ease;
   }
 
@@ -117,7 +130,7 @@
   }
 
   .nav-item:hover {
-    background-color: rgba(255, 255, 255, 0.2); /* Subtle hover effect */
+    background-color: rgba(255, 255, 255, 0.2);
   }
 }
 
@@ -127,11 +140,5 @@
 }
 
 .menu-icon.active + .nav-links {
-  height: auto; /* Make sure dropdown works with active state */
-}
-
-/* Add a toggle button effect */
-.menu-icon.active .menu-icon-svg {
-  transform: rotate(90deg);
-  transition: transform 0.3s ease-in-out;
+  height: auto;
 }
