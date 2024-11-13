@@ -3,7 +3,7 @@ const http = require("http");
 const cors = require("cors");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
-const seizureRoutes = require("./routes/seizureRoutes");
+const seizureRoutes = require("./routes/seizureRoutes"); // Updated to renamed route file
 const userRoutes = require("./routes/userRoutes");
 const initSocket = require("./utils/socket");
 
@@ -28,7 +28,7 @@ app.use(express.json());
 
 // API Routes
 app.use("/api/auth", authRoutes);
-app.use("/api/seizures", seizureRoutes);
+app.use("/api/seizures", seizureRoutes); // Updated to renamed route file
 app.use("/api/users", userRoutes);
 
 // Initialize Socket.io
@@ -37,7 +37,9 @@ const io = initSocket(server);
 // Global Error Handling (Optional)
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).json({ message: "Internal Server Error" });
+  res
+    .status(err.status || 500)
+    .json({ message: err.message || "Internal Server Error" });
 });
 
 // Server listening on port
